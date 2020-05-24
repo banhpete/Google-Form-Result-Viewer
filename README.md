@@ -49,9 +49,13 @@ Mockups of the Web App solution are presented below.
 
 ## 5. Pseudocode 
 - For every form submission, find who submitted the data, and then update the data tab. Add the new row number to the respective user.
-- When doGET() runs, it will serve the HTML data
+- When doGET() runs, it will serve the HTML data. Depending on the parameter present, it will display different HTML files.
+### For User to View - Require Parameters
 - When the HTML file is served, wait until the HTML is served and then run Javascript file to extract data.
 - Once data returns create new DOM nodes and fill the table for user to view data.
+### For Users to Submit Email - No Parameter
+- Send the form object to server side GS code, then send an email.
+- Update the DOM to notify users email will be sent.
 
 ## 6. Technologies Used
 ## 7. Project Content
