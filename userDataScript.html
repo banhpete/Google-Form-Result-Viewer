@@ -1,0 +1,11 @@
+<script>
+  google.script.url.getLocation(function (location) {
+    let passCode = location.parameter["passCode"];
+    google.script.run
+      .withSuccessHandler(function (data) {
+        console.log("hi");
+        console.log(data);
+      })
+      .dataRetrieveFor(passCode);
+  });
+</script>

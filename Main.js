@@ -44,7 +44,7 @@ function randChars() {
 
 function doGet(e) {
   // This function allows us to use the Google Web App. Essentially you call up the html file.
-  if (e.parameter["urlCode"]) {
+  if (e.parameter["passCode"]) {
     var htmltemp = HtmlService.createTemplateFromFile("userdata");
     return htmltemp.evaluate();
   } else {
