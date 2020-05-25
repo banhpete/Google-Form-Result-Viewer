@@ -38,3 +38,21 @@ function randChars(){
   }
   return url
 }
+
+/*------------ Web Apps Functions ------------ */
+
+function doGet(e) {
+  // This function allows us to use the Google Web App. Essentially you call up the html file.
+  if(e.parameter['urlCode']){
+    var htmltemp = HtmlService.createTemplateFromFile('userdata');
+    return htmltemp.evaluate();
+  }else{
+    var htmltemp = HtmlService.createTemplateFromFile('index');
+    return htmltemp.evaluate();
+  }
+}
+
+function include(filename){
+  // Function to allow HTML files to connect with one another
+  return HtmlService.createHtmlOutputFromFile(filename).getContent();  
+}
