@@ -16,3 +16,16 @@ function dataRetrieveFor(urlCode="abc") {
   }
   return dataArr
 }
+
+function urlGen(email = "Annasitu8@gmail.com"){
+  var data = dataSheet.getDataRange().getValues();
+  var formResponseData = formResponseSheet.getDataRange().getValues();
+  const EMAIL_ARR_INDEX = 1;
+  const URL_ARR_INDEX = 2;
+  if(findRowInCol(EMAIL_ARR_INDEX, email, data)){
+    var url = randChars();
+    dataSheet.getRange(findRowInCol(EMAIL_ARR_INDEX, email, data)+1, URL_ARR_INDEX+1).setValue(url);
+    return "Email found, user will receieve email with URL to view Google Form Sub"
+  }
+  return "No email found"
+}
