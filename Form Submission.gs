@@ -33,7 +33,7 @@ function addNewDevelopers(formResponseData, data){
     currentDevelopers.push(data[i][CUR_DEV_ARR_INDEX])
   }
   
-  var developerIndex = findColumn('Developer Name', formResponseData);
+  var developerIndex = findColumnInRow(0, 'Developer Name', formResponseData);
   
   for(let i=1 ; i<formResponseData.length; i++){
     if(!currentDevelopers.includes(formResponseData[i][developerIndex])){
