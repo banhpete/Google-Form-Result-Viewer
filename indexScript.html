@@ -1,0 +1,37 @@
+<script>
+  var button = document.querySelector("button");
+  var emailInput = document.querySelector("input");
+  var errMsg = document.querySelector(".formrow p");
+
+  button.onclick = function (e) {
+    e.preventDefault();
+    let emailText = emailInput.value;
+    let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (regex.test(String(emailText).toLowerCase())) {
+      emailInput.disabled = true;
+      button.style.cursor = "wait";
+      google.script.run
+        .withSuccessHandler(function (msg) {
+          if (msg.includes("No email found")) {
+            errMsg.style.color = "red";
+            errMsg.innerText =
+              "This email address was not found in the database - Please check your email and try again or contact admin";
+            button.style.cursor = "pointer";
+            emailInput.disabled = false;
+          } else {
+            errMsg.style.color = "green";
+            errMsg.innerText =
+              "Your email was found - please check your email shortly for the link to view your submissions";
+            button.style.cursor = "pointer";
+            emailInput.disabled = false;
+            emailInput.value = "";
+          }
+        })
+        .urlGen(emailText);
+    } else {
+      errMsg.style.color = "red";
+      errMsg.innerText =
+        "There was an issue with your email address - please review and try again";
+    }
+  };
+</script>

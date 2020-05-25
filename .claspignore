@@ -8,5 +8,6 @@
 !**/*.ts
 !**/*.html
 
+gulpfile.js
 .git/**
 node_modules/**
