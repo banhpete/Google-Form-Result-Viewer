@@ -43,10 +43,10 @@
               domTd.innerText = data[i][j];
               domTr.appendChild(domTd);
             }
+            domClone = domTr.cloneNode(true);
+            domTableHeading.appendChild(domClone);
             domTable.appendChild(domTr);
           }
-          domClone = domTr.cloneNode(true);
-          domTableHeading.appendChild(domClone);
 
           // Append tables to containers
           domTableConainer1.appendChild(domTableHeading);

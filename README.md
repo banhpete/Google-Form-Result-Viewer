@@ -4,11 +4,10 @@
 3. [Google Form Submission Reviewer](##3.-Google-Form-Submission-Reviewer)
 4. [Wireframe](##4.-Wireframe)
 5. [Psuedocode](##5.-Psuedocode)
-6. [Technologies Used](##6.-Technologies-Used)
-7. [Project Content](##7.-Project-Content)
-8. [Getting Started](##8.-Getting-Started)
-9. [Discussion on Development](##9.-Discussion-on-Development)
-10. [Next Steps](##10.-Next-Steps)
+6. [Project Content](##6.-Project-Content)
+7. [Implementing Solution](##7.-Implementing-Solution)
+8. [Discussion on Development](##8.-Discussion-on-Development)
+9. [Next Steps](##9.-Next-Steps)
 
 ## 1. Introduction
 The Google Form works well as a tool to collect data from it's user, however it can be quite challenging for a user to view their submission especially when the feature for the an email reply is turned off.
@@ -45,18 +44,44 @@ The second will be a table to show all the data specifc to the user.
 Mockups of the Web App solution are presented below.
 
 ![The page for the web app solution to allow users to set up their account](Wireframes/Web1366–2.png)
+
+In the first image above, this page will be used by the user to enter their email and receieve a url to view their submissions if their email is in the database. 
+
 ![The page for the web app solutions for users to view their results](Wireframes/Web1366–1.png)
 
+In the second image, pictured above, this page will be used by the user to view their submission. If the URL they entered is invalid, this webpage will show nothing.
+
 ## 5. Pseudocode 
-- For every form submission, find who submitted the data, and then update the data tab. Add the new row number to the respective user.
+### Google Script Function
+- For every form submission, find who submitted the data, and then update the data tab. Add the new row number to the respective user. In order to ensure the data is up to date, rather than just add a new number to the original list, the list should be re-made everytime in case there were any changes to the database.
 - When doGET() runs, it will serve the HTML data. Depending on the parameter present, it will display different HTML files.
+- When the web page for viewing submission is accessed, the client will send some passcode to a google script function, and then function will check if the passcode exists in the database. If it does it will send the data corresponding to the user that has that passcode back to the client. 
+- When the web page for users to request an url is accessed, users can run a function to first have the database check for the email, if it exists, a random 15 letter character is generated, assigned to the email, and then a url with the random 15 characters is sent to the email. If it doesn't exist the function just returns false.
 ### For User to View - Require Parameters
 - When the HTML file is served, wait until the HTML is served and then run Javascript file to extract data.
-- Once data returns create new DOM nodes and fill the table for user to view data.
+- Once data returns create new DOM nodes and fill the table for user to view data. If no data is returned, update the DOM accordingly.
 ### For Users to Submit Email - No Parameter
 - Send the form object to server side GS code, then send an email.
-- Update the DOM to notify users email will be sent.
+- Update the DOM to notify users email will be sent or if an email is invalid.
 
-## 6. Technologies Used
-## 7. Project Content
+## 6. Project Content
+With the release of the initial working version, the project consists of the following files:
 
+### Google Apps Script Files (*.gs)
+- Main.js - Contains general functions called out by the other functions, or used to serve HTML files.
+- Form Submission.Js - Contains a function that runs when a google form is submitted to the user. This function will go through the form responses, find all the developer names, and then create a list of the row indexes of the form responses that correspond to each developer.
+- APIS.js - Contains two functions that is called by the client, when visiting the web pages. dataRetrieve is to retrieve data from the google spreadsheet based on a passCode that is randomly generated and appended to the url of website as a parameter. A unique passcode is assigned to every user after they have it generated. The urlGen function is to generate a url for the user to view their submissions.
+
+### Web Page to Generate URL(*.html)
+When a user visits this web page, they will be served these three files. This is the web page that allows a user to generate a url to view their google form submissions.
+- index.html
+- indexStyle.html
+- indexScript.html
+
+### Web Page to view Google Form Submissions(*.html)
+When a user visits this web page, they will be served these three files. This is the web page to view the google form submissions based on a passcode that is submitted as a parameter.
+- userData.html
+- userDataStyle.html
+- userDataScript.html
+
+## 7. Implementing Solution

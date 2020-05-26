@@ -1,5 +1,5 @@
 var formResponseSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
-  "Form Responses 1"
+  "Form Responses 2"
 );
 var dataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data");
 
@@ -44,7 +44,7 @@ function randChars() {
 function doGet(e) {
   // This function allows us to use the Google Web App. Essentially you call up the html file.
   if (e.parameter["passCode"]) {
-    var htmltemp = HtmlService.createTemplateFromFile("userdata");
+    var htmltemp = HtmlService.createTemplateFromFile("userData");
     return htmltemp.evaluate();
   } else {
     var htmltemp = HtmlService.createTemplateFromFile("index");
