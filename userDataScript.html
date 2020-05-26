@@ -1,10 +1,61 @@
 <script>
+  var domMain = document.querySelector("main");
+  var test;
+
   google.script.url.getLocation(function (location) {
     let passCode = location.parameter["passCode"];
     google.script.run
       .withSuccessHandler(function (data) {
-        console.log("hi");
-        console.log(data);
+        if (data) {
+          var domHeading = document.createElement("h2");
+          domHeading.innerText = data[0][1];
+
+          // Create two containers
+          var domTableConainer1 = document.createElement("div");
+          var domTableConainer2 = document.createElement("div");
+
+          var domTableHeading = document.createElement("table");
+          var domTable = document.createElement("table");
+
+          /* ------ Creating the table heading ------- */
+          let domTr = document.createElement("tr");
+          let p;
+          let domTd;
+          for (let i = 0; i < Object.keys(data[0]).length; i++) {
+            p = document.createElement("p");
+            domTd = document.createElement("td");
+            p.innerText = data[data.length - 1][i];
+            domTd.appendChild(p);
+            domTr.appendChild(domTd);
+          }
+          domTableHeading.appendChild(domTr);
+          var domClone = domTr.cloneNode(true);
+          domTable.appendChild(domClone);
+
+          /* ------ Creating the table body ------- */
+          for (let i = 0; i < data.length - 1; i++) {
+            domTr = document.createElement("tr");
+            for (let j = 0; j < Object.keys(data[0]).length; j++) {
+              domTd = document.createElement("td");
+              domTd.innerText = data[i][j];
+              domTr.appendChild(domTd);
+            }
+            domTable.appendChild(domTr);
+          }
+          domClone = domTr.cloneNode(true);
+          domTableHeading.appendChild(domClone);
+
+          // Append tables to containers
+          domTableConainer1.appendChild(domTableHeading);
+          domTableConainer2.appendChild(domTable);
+
+          // Append two containers
+          domMain.appendChild(domHeading);
+          domMain.appendChild(domTableConainer1);
+          domMain.appendChild(domTableConainer2);
+        } else {
+          console.log("Nothing");
+        }
       })
       .dataRetrieveFor(passCode);
   });

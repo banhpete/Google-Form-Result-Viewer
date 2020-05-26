@@ -7,7 +7,7 @@ var dataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data");
 function findColumnInRow(row, string, arr) {
   let colIndex = 0;
   for (let i = 0; i < arr[0].length; i++) {
-    if (arr[row][i].toLowerCase().includes(string)) {
+    if (arr[row][i].includes(string)) {
       colIndex = i;
       return colIndex;
     }
@@ -18,8 +18,7 @@ function findColumnInRow(row, string, arr) {
 function findRowInCol(col, string, arr) {
   let rowIndex = 0;
   for (let i = 0; i < arr.length; i++) {
-    Logger.log(arr[i][col]);
-    if (arr[i][col].toLowerCase().includes(string)) {
+    if (arr[i][col].includes(string)) {
       rowIndex = i;
       return rowIndex;
     }
