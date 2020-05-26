@@ -57,7 +57,12 @@
           domMain.appendChild(domTableConainer1);
           domMain.appendChild(domTableConainer2);
         } else {
-          console.log("Nothing");
+          var loadingScreen = document.querySelector(".loading");
+          loadingScreen.style.display = "none";
+          var domHeading = document.createElement("h2");
+          domHeading.innerText =
+            "Invalid passcode - Try again or contact the admin";
+          domMain.appendChild(domHeading);
         }
       })
       .dataRetrieveFor(passCode);

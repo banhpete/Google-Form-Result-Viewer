@@ -24,12 +24,14 @@ function dataRetrieveFor(urlCode = "A03PVRaahL1Hxlo3") {
   }
 }
 
-function urlGen(email = "Annasitu8@gmail.com") {
+function urlGen(email) {
   var data = dataSheet.getDataRange().getValues();
   var formResponseData = formResponseSheet.getDataRange().getValues();
   const EMAIL_ARR_INDEX = 1;
   const URL_ARR_INDEX = 2;
-  if (findRowInCol(EMAIL_ARR_INDEX, email, data)) {
+  var emailCheck = findRowInCol(EMAIL_ARR_INDEX, email, data);
+  var name = data[emailCheck][0];
+  if (emailCheck) {
     var url = randChars();
     dataSheet
       .getRange(
@@ -37,6 +39,16 @@ function urlGen(email = "Annasitu8@gmail.com") {
         URL_ARR_INDEX + 1
       )
       .setValue(url);
+    MailApp.sendEmail({
+      to: email,
+      subject: "Link to view Google Form Submission",
+      htmlBody:
+        "Hi " +
+        name +
+        ", <br><br>To view your google form submissions please visit the following link:<br>https://script.google.com/macros/s/AKfycby-eKCuqc6SaQHpa9-K7_G2Rgzi2ss2A4ChAfNxfdkBjXY7SZ8_/exec?passCode=" +
+        url +
+        ".<br><br>Please bookmark this page for future references.<br><br>For any questions or concern please contact the admin of the Google Form.",
+    });
     return "Email found, user will receieve email with URL to view Google Form Sub";
   }
   return "No email found";
