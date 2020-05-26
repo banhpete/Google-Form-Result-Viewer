@@ -7,6 +7,9 @@
     google.script.run
       .withSuccessHandler(function (data) {
         if (data) {
+          var loadingScreen = document.querySelector(".loading");
+          loadingScreen.style.display = "none";
+
           var domHeading = document.createElement("h2");
           domHeading.innerText = data[0][1];
 
