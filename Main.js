@@ -1,7 +1,15 @@
-var formResponseSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
+// Global Variables Initialized - These grab the sheet by name, if your spreadsheet
+// is different change it accordingly. The formResponseSheet is the sheet for
+// for the form responses. The dataSheet is where we store data pertraining
+// to which rows belong to which user.
+const formResponseSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
   "Form Responses 2"
 );
-var dataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data");
+const dataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data");
+const nameHeadingInSheet = "Developer Name";
+const rowsOfFormHeading = "Rows of Form Submission";
+const emailHeading = "Email";
+const passCodeHeading = "passCode";
 
 /*------------ General Functions ------------ */
 function findColumnInRow(row, string, arr) {
@@ -42,7 +50,10 @@ function randChars() {
 /*------------ Web Apps Functions ------------ */
 
 function doGet(e) {
-  // This function allows us to use the Google Web App. Essentially you call up the html file.
+  // This function allows us to use the Google Web App.
+  // Essentially it calls up the html file.
+  // Depending if the url has "passCode" in the parameter or not, a different
+  // HTML file is served.
   if (e.parameter["passCode"]) {
     var htmltemp = HtmlService.createTemplateFromFile("userData");
     return htmltemp.evaluate();
@@ -53,6 +64,8 @@ function doGet(e) {
 }
 
 function include(filename) {
-  // Function to allow HTML files to connect with one another
+  // Function to allow HTML files to connect with one another. This is important
+  // For having HTML files connect with other HTML files that are supposed to be
+  // the CSS and JS files
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }

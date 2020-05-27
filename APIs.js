@@ -1,18 +1,18 @@
 /*------------ API functions for Client Side ------------ */
-function dataRetrieveFor(urlCode = "A03PVRaahL1Hxlo3") {
+function dataRetrieveFor(urlCode = "test") {
   var data = dataSheet.getDataRange().getValues();
   var formResponseData = formResponseSheet.getDataRange().getValues();
-  const URL_ARR_INDEX = 2;
-  const ROW_ARR_INDEX = 3;
-  var passCodeCheck = findRowInCol(URL_ARR_INDEX, urlCode, data);
+  var passCodeIndexData = findColumnInRow(0, passCodeHeading, data);
+  var rowIndexData = findColumnInRow(0, rowsOfFormHeading, data);
+  var passCodeCheck = findRowInCol(passCodeIndexData, urlCode, data);
   if (passCodeCheck) {
-    var rowIndexes = data[passCodeCheck][ROW_ARR_INDEX].split(",");
-    rowIndexes.push(1);
+    var rowIndexesForm = data[passCodeCheck][rowIndexData].split(",");
+    rowIndexesForm.push(1);
     var dataArr = [];
-    for (let i = 0; i < rowIndexes.length; i++) {
+    for (let i = 0; i < rowIndexesForm.length; i++) {
       let tempObj = {};
       for (let j = 0; j < formResponseData[0].length; j++) {
-        tempObj[j] = formResponseData[parseInt(rowIndexes[i]) - 1][
+        tempObj[j] = formResponseData[parseInt(rowIndexesForm[i]) - 1][
           j
         ].toString();
       }
@@ -24,21 +24,15 @@ function dataRetrieveFor(urlCode = "A03PVRaahL1Hxlo3") {
   }
 }
 
-function urlGen(email) {
+function urlGen(email = "test") {
   var data = dataSheet.getDataRange().getValues();
-  var formResponseData = formResponseSheet.getDataRange().getValues();
-  const EMAIL_ARR_INDEX = 1;
-  const URL_ARR_INDEX = 2;
-  var emailCheck = findRowInCol(EMAIL_ARR_INDEX, email, data);
+  var emailIndexData = findColumnInRow(0, emailHeading, data);
+  var passCodeIndexData = findColumnInRow(0, passCodeHeading, data);
+  var emailCheck = findRowInCol(emailIndexData, email, data);
   var name = data[emailCheck][0];
   if (emailCheck) {
     var url = randChars();
-    dataSheet
-      .getRange(
-        findRowInCol(EMAIL_ARR_INDEX, email, data) + 1,
-        URL_ARR_INDEX + 1
-      )
-      .setValue(url);
+    dataSheet.getRange(emailCheck + 1, passCodeIndexData + 1).setValue(url);
     MailApp.sendEmail({
       to: email,
       subject: "Link to view Google Form Submission",
