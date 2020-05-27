@@ -11,7 +11,7 @@
           loadingScreen.style.display = "none";
 
           var domHeading = document.createElement("h2");
-          domHeading.innerText = data[0][1];
+          domHeading.innerText = data[0];
 
           // Create two containers
           var domTableConainer1 = document.createElement("div");
@@ -36,7 +36,7 @@
           domTable.appendChild(domClone);
 
           /* ------ Creating the table body ------- */
-          for (let i = 0; i < data.length - 1; i++) {
+          for (let i = 1; i < data.length - 1; i++) {
             domTr = document.createElement("tr");
             for (let j = 0; j < Object.keys(data[0]).length; j++) {
               domTd = document.createElement("td");

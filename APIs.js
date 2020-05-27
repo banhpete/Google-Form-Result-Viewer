@@ -5,10 +5,13 @@ function dataRetrieveFor(urlCode = "test") {
   var passCodeIndexData = findColumnInRow(0, passCodeHeading, data);
   var rowIndexData = findColumnInRow(0, rowsOfFormHeading, data);
   var passCodeCheck = findRowInCol(passCodeIndexData, urlCode, data);
+  var nameIndexData = findColumnInRow(0, nameHeadingInSheet, data);
   if (passCodeCheck) {
     var rowIndexesForm = data[passCodeCheck][rowIndexData].split(",");
     rowIndexesForm.push(1);
     var dataArr = [];
+    var name = data[passCodeCheck][nameIndexData];
+    dataArr.push(name);
     for (let i = 0; i < rowIndexesForm.length; i++) {
       let tempObj = {};
       for (let j = 0; j < formResponseData[0].length; j++) {
