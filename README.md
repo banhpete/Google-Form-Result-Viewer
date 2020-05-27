@@ -6,8 +6,6 @@
 5. [Psuedocode](##5.-Psuedocode)
 6. [Project Content](##6.-Project-Content)
 7. [Implementing Solution](##7.-Implementing-Solution)
-8. [Discussion on Development](##8.-Discussion-on-Development)
-9. [Next Steps](##9.-Next-Steps)
 
 ## 1. Introduction
 The Google Form works well as a tool to collect data from it's user, however it can be quite challenging for a user to view their submission especially when the feature for the an email reply is turned off.
@@ -85,3 +83,29 @@ When a user visits this web page, they will be served these three files. This is
 - userDataScript.html
 
 ## 7. Implementing Solution
+If there is a Google Form that has users submitting the form multiple time, and there is a need for the users to view all their submissions, then this solution can be implemented, as long as the following are met:
+
+- The html files and gs files have been implemented into the Google Apps Script of the google spreadsheet. It is suggested to use [Google Clasp](https://github.com/google/clasp/)to complete this action, otherwise the copy may just be copied and pasted in.
+- The form has the user entering an id that is always the same for every submission.
+- In the spreadsheet another tab is added named "Data" along with the Form Response Tab. If the file names are different, then change the variable "formResponseSheet" and "dataSheet" in Main.js accordingly, they are global variables.
+![Images of Spreadsheet Tabs](README-Images/Spreadsheet-Tabs.jpg)
+
+- In the Data Sheet, ideally the data should have the headings shown in Row 1 of the following image. The order of the heading does not have to be the same. If for whatever reason, the heading names have to be changed, these changes need to be captured in the global variable in Main.js. Please note that both sheets, the "formResponseSheet" and the "dataSheet" must have the identical row heading of "Developer Name" or whatever is prefered for the user's name.
+![Image of Data Tab Sheet Format](README-Images/Format-for-Data-Tab.jpg)
+
+- When the data tab has been created, and the headings have been created, if there have been form submissions already, either run the formSubmission function once or wait another user submits the form again. This will determine which rows belong to which user. 
+
+- In the Google Apps Script platform, under publish, deploy the code as web app.
+
+- Copy the web app url and change the anchor link in userData.html for the "Request New Url" button. Also, change the anchor link for the "New Submission" button to the form that is currently being used.
+
+- In the Google Apps Script platform, under publish, deploy the code as web app again with a new project version.
+
+- Once that has been completed, enter each user's emails, and at this point this may now visit the page for url generation.
+
+## 8. Demo
+See the following for a Demo
+
+- URL Generation: https://script.google.com/macros/s/AKfycby-eKCuqc6SaQHpa9-K7_G2Rgzi2ss2A4ChAfNxfdkBjXY7SZ8_/exec
+- Submission Viewer: https://script.google.com/macros/s/AKfycby-eKCuqc6SaQHpa9-K7_G2Rgzi2ss2A4ChAfNxfdkBjXY7SZ8_/exec?passCode=KzvjTJcFnVhrBEhH
+- Spreadsheet: https://docs.google.com/spreadsheets/d/1VDxhB6jM43WjXDx5-TdfrA-bmpGcX4MTusMkeawQHdM/edit?usp=sharing

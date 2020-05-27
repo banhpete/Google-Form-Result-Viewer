@@ -54,7 +54,7 @@ function doGet(e) {
   // Essentially it calls up the html file.
   // Depending if the url has "passCode" in the parameter or not, a different
   // HTML file is served.
-  if (e.parameter["passCode"]) {
+  if (e.parameter[passCodeHeading]) {
     var htmltemp = HtmlService.createTemplateFromFile("userData");
     return htmltemp.evaluate();
   } else {
