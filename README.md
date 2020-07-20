@@ -1,12 +1,12 @@
 # Google-Form-Submission-Viewer
-1. [Introdution](##1.-Introduction)
-2. [Project Requirements](##2.-Project-Requirements)
-3. [Google Form Submission Reviewer](##3.-Google-Form-Submission-Reviewer)
-4. [Wireframe](##4.-Wireframe)
-5. [Psuedocode](##5.-Psuedocode)
-6. [Project Content](##6.-Project-Content)
-7. [Implementing Solution](##7.-Implementing-Solution)
-8. [Demo](##8-demo)
+1. [Introdution](#1-introduction)
+2. [Project Requirements](#2-project-requirements)
+3. [Google Form Submission Reviewer](#3-google-form-submission-reviewer)
+4. [Wireframe](#4-wireframe)
+5. [Psuedocode](#5-pseudocode)
+6. [Project Content](#6-project-content)
+7. [Implementing Solution](#7-implementing-solution)
+8. [Demo](#8-demo)
 
 ## 1. Introduction
 The Google Form works well as a tool to collect data from it's user, however it can be quite challenging for a user to view their submission especially when the feature for the an email reply is turned off.
