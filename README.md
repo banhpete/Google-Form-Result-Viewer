@@ -6,6 +6,7 @@
 5. [Psuedocode](##5.-Psuedocode)
 6. [Project Content](##6.-Project-Content)
 7. [Implementing Solution](##7.-Implementing-Solution)
+8. [Demo](##8.-Demo)
 
 ## 1. Introduction
 The Google Form works well as a tool to collect data from it's user, however it can be quite challenging for a user to view their submission especially when the feature for the an email reply is turned off.
